@@ -106,7 +106,7 @@ class DefaultController extends AbstractController
                 $this->parsePaginaNormal($values, $indexAluno);
             }
         }
-        unlink($filePath);
+        //unlink($filePath);
         echo $this->preview();
         die;
 
@@ -135,8 +135,8 @@ class DefaultController extends AbstractController
         foreach ($this->array as $aluno) {
             $sheet->setCellValue([1,$row], $aluno["codigo"]);
             $sheet->setCellValue([2,$row], $aluno["nome"]);
-            $sheet->setCellValue([3,$row], $aluno["total_disciplinas_concluidas"]);
-            $sheet->setCellValue([4,$row], $aluno["total_disciplinas_cursando"]);
+            $sheet->setCellValue([3,$row], $aluno["total_disciplinas_cursando"]);
+            $sheet->setCellValue([4,$row], $aluno["total_disciplinas_concluidas"]);
 
             $columnValue = 5;
             foreach($this->arrayDisciplinas as $nomeDisciplina  => $estaAtiva) {
