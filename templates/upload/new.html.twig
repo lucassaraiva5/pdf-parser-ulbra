@@ -3,19 +3,23 @@
 
 {% block title %}Upload do arquivo{% endblock %}
 {% block body %}
-    <h3>Versão de teste!!!</h3>
-    <br>
+    <div class="container">
+        <h3>Versão 1.0 - Alfa[TESTE]</h3>
+        <br>
 
-    {{ form_start(form) }}
-        {{ form_row(form.file) }}
-        {{ form_row(form.submit) }}
-    {{ form_end(form) }}
-    <br>
-    <br>
-    <p>
-        Desenvolvido pelo Curso de Analise e Desenvolvimento de Sistemas da ULBRA TORRES.<br>
-        Creditos: Professor Paulo Ignacio (Desenvolvedor e fundador do projeto) e Lucas Saraiva<br>
-        Se identificar qualquer problema, por favor reportar o email: computacao.torres@ulbra.br<br>
+        {{ form_start(form) }}
+            {{ form_row(form.file) }}
+            {{ form_row(form.submit) }}
+        {{ form_end(form) }}
+        <br>
+        <br>
+        <p>
+            Desenvolvido pelo Curso de Analise e Desenvolvimento de Sistemas da ULBRA TORRES.<br>
+            Creditos: Professor Paulo Ignacio (Desenvolvedor e fundador do projeto) e Lucas Saraiva<br>
+            Se identificar qualquer problema, por favor reportar o email: computacao.torres@ulbra.br<br>
         </p>
+
+    </div>
+    
 
 {% endblock %}
