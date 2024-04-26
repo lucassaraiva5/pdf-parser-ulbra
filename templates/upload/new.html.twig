@@ -4,20 +4,27 @@
 {% block title %}Upload do arquivo{% endblock %}
 {% block body %}
     <div class="container">
-        <h3>Versão 1.0 - Alfa[TESTE]</h3>
         <br>
-
+        <br>
+        <div class="d-flex justify-content-center">
+            <h3 class="align-center">Versão 1.0 - Alfa [TESTE]</h3>
+        </div>
+        <br>
         {{ form_start(form) }}
             {{ form_row(form.file) }}
             {{ form_row(form.submit) }}
         {{ form_end(form) }}
         <br>
+        <hr>
         <br>
-        <p>
-            Desenvolvido pelo Curso de Analise e Desenvolvimento de Sistemas da ULBRA TORRES.<br>
-            Creditos: Professor Paulo Ignacio (Desenvolvedor e fundador do projeto) e Lucas Saraiva<br>
-            Se identificar qualquer problema, por favor reportar o email: computacao.torres@ulbra.br<br>
-        </p>
+        <div class="d-flex justify-content-center">
+            <p>
+                Desenvolvido pelo Curso de Analise e Desenvolvimento de Sistemas da ULBRA TORRES.<br>
+                Creditos: Professor Paulo Ignacio (Desenvolvedor e fundador do projeto) e Lucas Saraiva<br>
+                Se identificar qualquer problema, por favor reportar o email: computacao.torres@ulbra.br<br>
+            </p>
+        </div>
+        
 
     </div>
     

@@ -106,7 +106,7 @@ class DefaultController extends AbstractController
                 $this->parsePaginaNormal($values, $indexAluno);
             }
         }
-        //unlink($filePath);
+        dd($this->array[43]);
         echo $this->preview();
         die;
 
@@ -215,10 +215,6 @@ class DefaultController extends AbstractController
                 $this->arrayDisciplinas[$disciplina] = true;
                 $status = $this->getStatusByValue($values[$i]);
 
-                if($status == "Aprovado" || $status == "Dispensado") {
-                    $this->array[$indexAluno]['total_disciplinas_concluidas']++;
-                }
-
                 $this->array[$indexAluno]['disciplinas'][$indiceSemestre][] = [
                     "disciplina" => $disciplina,
                     "status" => $status
@@ -226,16 +222,12 @@ class DefaultController extends AbstractController
 
                 if(!isset($this->array[$indexAluno]['statusPorDisciplina'][$disciplina])) {
                     $this->array[$indexAluno]['statusPorDisciplina'][$disciplina] = $status;
-                    switch ($status) {
-                        case 'Aprovado':
-                            $this->array[$indexAluno]['total_disciplinas_concluidas']++;
-                            break;
-                        case 'Dispensado':
-                            $this->array[$indexAluno]['total_disciplinas_concluidas']++;
-                            break;
-                        case 'Em Curso':
-                            $this->array[$indexAluno]['total_disciplinas_cursando']++;
-                            break;
+
+                    if($status == 'Aprovado' || $status == 'Dispensado') {
+                        $this->array[$indexAluno]['total_disciplinas_concluidas']++;
+                    }
+                    if($status == 'Em Curso') {
+                        $this->array[$indexAluno]['total_disciplinas_cursando']++;
                     }
                 }
 
