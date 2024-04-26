@@ -124,7 +124,7 @@ class DefaultController extends AbstractController
         $column = 3;
         foreach($this->arrayDisciplinas as $nomeDisciplina => $estaAtiva) {
             if($estaAtiva) {
-                $sheet->setCellValue([$column,1], 'Nome');
+                $sheet->setCellValue([$column,1], $nomeDisciplina);
                 $column++;
             }
         }
