@@ -32,27 +32,20 @@ class DefaultController extends AbstractController
             /** @var UploadedFile $brochureFile */
             $file = $form->get('file')->getData();
 
-            // this condition is needed because the 'brochure' field is not required
-            // so the PDF file must be processed only when a file is uploaded
             if ($file) {
                 $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
                 $filenameRaw = $safeFilename.'-'.uniqid();
                 $newFilename = $filenameRaw.'.'.$file->guessExtension();
 
-                // Move the file to the directory where brochures are stored
                 try {
                     $file->move(
                         $this->getParameter('files_directory'),
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
                 }
 
-                // updates the 'brochureFilename' property to store the PDF file name
-                // instead of its contents
                 $fileEntity->setName($newFilename);
             }
 
@@ -79,23 +72,12 @@ class DefaultController extends AbstractController
 
         $text = $pdf->getText();
 
-        $array = explode("Universidade Luterana do Brasil - Campus Torres", $text);
+        $array = explode("Universidade Luterana do Brasil - Campus", $text);
 
         unset($array[0]);
         $indexAluno = -1;
         foreach($array as $pagina) {
-            $pagina =str_replace([
-                "Campus Torres",
-                "- Campus",
-                "R. Universitária",
-                "1900",
-                " Parque do Balonismo ",
-                " CEP: 95560-000","Torres",
-                "- RS -"," Brasil",
-                " - (51) 3626 2000",
-                " - https://www.ulbra.br/torres",
-                "--", "-", ",",
-            "Histórico","Escolar","Nome", "Código "], "", $pagina);
+            $pagina =str_replace(["Histórico","Escolar","Nome", "Código "], "", $pagina);
             
             $values = explode("\n", $pagina);
 
