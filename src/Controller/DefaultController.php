@@ -230,12 +230,17 @@ class DefaultController extends AbstractController
                 if($status == "Aprovado" || $status == "Dispensado") {
                     $this->array[$indexAluno]['total_disciplinas_concluidas']++;
                 }
+
                 $this->array[$indexAluno]['disciplinas'][$indiceSemestre][] = [
                     "disciplina" => $disciplina,
                     "status" => $status
                 ];
 
-                $this->array[$indexAluno]['statusPorDisciplina'][$disciplina] = $status;
+                if(!isset($this->array[$indexAluno]['statusPorDisciplina'][$disciplina])) {
+                    $this->array[$indexAluno]['statusPorDisciplina'][$disciplina] = $status;
+                }
+
+                
         }
     }
 
