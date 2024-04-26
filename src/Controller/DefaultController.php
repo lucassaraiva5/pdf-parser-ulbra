@@ -215,18 +215,6 @@ class DefaultController extends AbstractController
                 $this->arrayDisciplinas[$disciplina] = true;
                 $status = $this->getStatusByValue($values[$i]);
 
-                switch ($status) {
-                    case 'Aprovado':
-                        $this->array[$indexAluno]['total_disciplinas_concluidas']++;
-                        break;
-                    case 'Dispensado':
-                        $this->array[$indexAluno]['total_disciplinas_concluidas']++;
-                        break;
-                    case 'Em Curso':
-                        $this->array[$indexAluno]['total_disciplinas_cursando']++;
-                        break;
-                }
-
                 if($status == "Aprovado" || $status == "Dispensado") {
                     $this->array[$indexAluno]['total_disciplinas_concluidas']++;
                 }
@@ -238,6 +226,17 @@ class DefaultController extends AbstractController
 
                 if(!isset($this->array[$indexAluno]['statusPorDisciplina'][$disciplina])) {
                     $this->array[$indexAluno]['statusPorDisciplina'][$disciplina] = $status;
+                    switch ($status) {
+                        case 'Aprovado':
+                            $this->array[$indexAluno]['total_disciplinas_concluidas']++;
+                            break;
+                        case 'Dispensado':
+                            $this->array[$indexAluno]['total_disciplinas_concluidas']++;
+                            break;
+                        case 'Em Curso':
+                            $this->array[$indexAluno]['total_disciplinas_cursando']++;
+                            break;
+                    }
                 }
 
                 
