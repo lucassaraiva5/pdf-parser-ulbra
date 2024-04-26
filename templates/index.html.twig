@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Upload do arquivo{% endblock %}
+{% block body %}
+    <br>
+    <br>
+    <div class="container">
+        <form action="/upload" method="POST">
+                <div class="input-group mb-3">
+                    <input type="file" name="fileToUpload" id="fileToUpload" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Enviar</button>
+        </form>
+    </div>
+    
+
+{% endblock %}

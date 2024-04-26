@@ -1,0 +1,12 @@
+
+{% extends "base.html.twig" %}
+
+{% block title %}Upload do arquivo{% endblock %}
+{% block body %}
+
+    {{ form_start(form) }}
+        {{ form_row(form.file) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+
+{% endblock %}
