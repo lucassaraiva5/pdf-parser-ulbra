@@ -120,8 +120,10 @@ class DefaultController extends AbstractController
 
         $sheet->setCellValue([1,1], 'Codigo');
         $sheet->setCellValue([2,1], 'Nome');
+        $sheet->setCellValue([3,1], 'QTD Disciplinas Cursando');
+        $sheet->setCellValue([4,1], 'QTD Disciplinas Concluidas');
 
-        $column = 3;
+        $column = 5;
         foreach($this->arrayDisciplinas as $nomeDisciplina => $estaAtiva) {
             if($estaAtiva) {
                 $sheet->setCellValue([$column,1], $nomeDisciplina);
@@ -133,8 +135,10 @@ class DefaultController extends AbstractController
         foreach ($this->array as $aluno) {
             $sheet->setCellValue([1,$row], $aluno["codigo"]);
             $sheet->setCellValue([2,$row], $aluno["nome"]);
+            $sheet->setCellValue([3,$row], $aluno["total_disciplinas_concluidas"]);
+            $sheet->setCellValue([4,$row], $aluno["total_disciplinas_cursando"]);
 
-            $columnValue = 3;
+            $columnValue = 5;
             foreach($this->arrayDisciplinas as $nomeDisciplina  => $estaAtiva) {
                 if(isset($aluno["statusPorDisciplina"][$nomeDisciplina])) {
                     $sheet->setCellValue([$columnValue,$row], $aluno["statusPorDisciplina"][$nomeDisciplina]);
@@ -166,6 +170,8 @@ class DefaultController extends AbstractController
         $this->array[$indexAluno]['curso'] = trim($values[7]);
         $this->array[$indexAluno]['semestre_atual_proc'] = "1º Semestre";
         $this->array[$indexAluno]['indice_semestre'] = 0;
+        $this->array[$indexAluno]['total_disciplinas_concluidas'] = 0;
+        $this->array[$indexAluno]['total_disciplinas_cursando'] = 0;
         $this->array[$indexAluno]['disciplinas'] = [];
         $this->array[$indexAluno]['statusPorDisciplina'] = [];
 
@@ -208,6 +214,22 @@ class DefaultController extends AbstractController
                 }
                 $this->arrayDisciplinas[$disciplina] = true;
                 $status = $this->getStatusByValue($values[$i]);
+
+                switch ($status) {
+                    case 'Aprovado':
+                        $this->array[$indexAluno]['total_disciplinas_concluidas']++;
+                        break;
+                    case 'Dispensado':
+                        $this->array[$indexAluno]['total_disciplinas_concluidas']++;
+                        break;
+                    case 'Em Curso':
+                        $this->array[$indexAluno]['total_disciplinas_cursando']++;
+                        break;
+                }
+
+                if($status == "Aprovado" || $status == "Dispensado") {
+                    $this->array[$indexAluno]['total_disciplinas_concluidas']++;
+                }
                 $this->array[$indexAluno]['disciplinas'][$indiceSemestre][] = [
                     "disciplina" => $disciplina,
                     "status" => $status
