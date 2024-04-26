@@ -106,7 +106,6 @@ class DefaultController extends AbstractController
                 $this->parsePaginaNormal($values, $indexAluno);
             }
         }
-        dd($this->array[43]);
         echo $this->preview();
         die;
 
